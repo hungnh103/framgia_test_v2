@@ -9,8 +9,8 @@ class Question < ActiveRecord::Base
   enum question_type: [:single_choice, :multiple_choice, :text]
 
   has_many :options, dependent: :destroy
-  has_many :exams, through: :results
-  has_many :results
+  has_many :results, dependent: :destroy
+  has_many :exams, through: :results, dependent: :destroy
 
   validates :content, presence: true
 
@@ -38,3 +38,4 @@ class Question < ActiveRecord::Base
     end.to_json
   end
 end
+
