@@ -3,7 +3,7 @@ class Result < ActiveRecord::Base
   belongs_to :question
 
   has_many :answers, dependent: :destroy
-  has_many :options, through: :answers
+  has_many :options, through: :answers, dependent: :destroy
 
   after_create :create_answers
 
