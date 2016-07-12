@@ -80,4 +80,8 @@ class Exam < ActiveRecord::Base
   def column_subject
     "#{subject.name}"
   end
+
+  def column_id
+    "#{id}"
+  end
 end
