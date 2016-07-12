@@ -4,6 +4,7 @@ module RailsAdminExam
   included do
     rails_admin do
       show do
+
         field :status do
           pretty_value do
             status = bindings[:object]
@@ -23,6 +24,7 @@ module RailsAdminExam
           label "Spent time"
           formatted_value{bindings[:object].spent_time_format}
         end
+        field :id
         field :user
         field :subject
         field :questions
@@ -31,11 +33,16 @@ module RailsAdminExam
       list do
         filters [:user_id, :subject_id]
         sort_by :created_at
+
         field :user_id, :enum do
           enum do
             User.all.collect {|p| [p.name, p.id]}
           end
           hide
+        end
+        field :column_id do
+          column_width 50
+          label "Id"
         end
         field :subject_id, :enum do
           enum do
