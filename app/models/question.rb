@@ -9,7 +9,7 @@ class Question < ActiveRecord::Base
   enum question_type: [:single_choice, :multiple_choice, :text]
 
   has_many :options, dependent: :destroy
-  has_many :results
+  has_many :results, dependent: :destroy
   has_many :exams, through: :results
 
   validates :content, presence: true
