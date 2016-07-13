@@ -58,6 +58,7 @@ RailsAdmin.config do |config|
     deactive_question do
       only Question
     end
+    delete
     show_in_app do
       except ["User", "Exam"]
     end
