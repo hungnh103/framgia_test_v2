@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = exception.message
-    current_user.admin? ? redirect_to(rails_admin.dashboard_path) : redirect_to(main_app.root_path)
+    #current_user.admin? ? redirect_to(rails_admin.dashboard_path) : redirect_to(main_app.root_path)
   end
 
   def after_sign_in_path_for resource

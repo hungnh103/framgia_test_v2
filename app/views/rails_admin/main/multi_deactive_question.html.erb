@@ -1,7 +1,0 @@
-<h4><%= t "questions.labels.multi_deactive_question" %></h4>
-<%= render partial: "active_question" , collection: @active_questions %>
-<%= link_to t("questions.features.sure"),
-  multi_deactive_question_path(Question, bulk_ids: params[:bulk_ids]), method: :patch,
-  class: "btn btn-danger icon-ok btn-margin" %>
-<%= link_to t("questions.features.cancel"),multi_deactive_question_path(Question, cancel: 1),
-  method: :post, class: "btn btn-default icon-remove btn-margin" %>

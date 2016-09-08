@@ -1,7 +1,0 @@
-en:
-  questions:
-    content: "Content"
-    answer: "Answer"
-    correct: "Correct"
-    reject_question: "Reject question"
-    confirm_question: "Accept question"

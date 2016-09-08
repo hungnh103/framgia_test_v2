@@ -1,6 +1,4 @@
 class Question < ActiveRecord::Base
-  include RailsAdminQuestion
-  include RailsAdmin::Engine.routes.url_helpers
 
   belongs_to :subject
   belongs_to :user

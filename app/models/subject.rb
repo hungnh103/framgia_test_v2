@@ -1,5 +1,4 @@
 class Subject < ActiveRecord::Base
-  include RailsAdminSubject
 
   has_many :exams, dependent: :destroy
   has_many :questions, dependent: :destroy
