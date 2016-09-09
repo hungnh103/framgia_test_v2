@@ -1,5 +1,4 @@
 class Exam < ActiveRecord::Base
-  include RailsAdminExam
 
   belongs_to :user
   belongs_to :subject
