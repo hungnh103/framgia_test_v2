@@ -4,7 +4,7 @@
   <td><%= exam.subject.name %></td>
   <td>
     <% if exam.start? %>
-     <span class="label label-primary width-label">
+      <span class="label label-primary">
     <% elsif exam.testing? %>
       <span class="label label-warning">
     <% elsif exam.unchecked? %>
@@ -12,7 +12,7 @@
     <% else %>
       <span class="label label-success">
     <% end %>
-       <%= exam.status %>
+      <%= exam.status %>
       </span>
   </td>
   <td><%= exam.subject.duration %></td>

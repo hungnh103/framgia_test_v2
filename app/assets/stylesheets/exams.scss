@@ -48,26 +48,34 @@
 
   .timer {
     border: 1px solid #E6E6E6;
-    background-color: #FFFFCC;
-    float: right;
+    background-color: rgba(255, 255, 204, 0.5);
     position: fixed;
-    right: 70px;
+    right: 10px;
     top: 70px;
+    border-radius: 2px;
+    width: 200px;
   }
 
   .btn-submit {
-    border-radius: 0px;
-    margin: 10px;
+    border-radius: 2px;
+    margin-bottom: 10px;
     width: 20%;
+    min-width: 200px;
   }
 
   .button {
-    border-radius: 0px;
+    border-radius: 2px;
+  }
+
+  #btn-submit-form-group {
+    position: fixed;
+    bottom: 0px;
+    right: 0;
+    left: 0;
+  }
+
+  ol {
+    margin-bottom: 40px;
   }
 }
 
-.width-label {
-  padding: 18px 28px;
-  font-size: 22px;
-  line-height: normal;
-}

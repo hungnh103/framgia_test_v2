@@ -6,17 +6,20 @@
   <%= f.text_area :content, class: "form-control" %>
   <%= f.label :question_type, class: "space-top" %>
   <% if @question.new_record? %>
-    <%= f.collection_select :question_type, Settings.exam.question_type, :first, :last, {}, class: "form-control width-question-type"  %>
+    <%= f.collection_select :question_type,
+      Settings.exam.question_type, :first, :last, {},
+      class: "form-control width-question-type"  %>
   <% else %>
     <span class="question_type_text"><%= @question.question_type.capitalize %></span>
   <%end%>
+
   <div class="space-top">
     <%= f.fields_for :options do |ff| %>
       <%= render "questions/option_fields", f: ff %>
     <% end %>
-    <div class="option-fields">
+    <p class="option-fields">
       <%= link_to_add_fields t("questions.features.add_option"), f, :options %>
-    </div>
+    </p>
   </div>
   <%= f.submit @question.new_record? ? t("questions.features.suggest") : t("questions.features.update_question"),
     class: "btn btn-primary button space-top-submit" %>

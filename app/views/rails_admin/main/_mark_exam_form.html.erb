@@ -1,7 +1,7 @@
 <%= form_for(object, url: mark_exam_path, method: :post) do |f| %>
   <ol>
     <%= f.fields_for :results do |ff| %>
-      <li><%= ff.object.question.content %></li>
+      <li><%= ff.object.question.content.html_safe %></li>
       <% if ff.object.question.multiple_choice? %>
         <%= ff.collection_check_boxes :option_ids, ff.object.question.options,
           :id, :content, {}, {disabled: true} do |ck| %>
