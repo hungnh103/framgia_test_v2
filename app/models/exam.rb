@@ -60,8 +60,8 @@ class Exam < ActiveRecord::Base
   end
 
   def duration
-    unchecked? ||checked? ? 0 : subject.duration * 60 - (Time.zone.now -
-      results.first.created_at).to_i
+    return 0 if unchecked? || checked?
+    (subject.duration || 20) * 60 - (Time.zone.now - results.first.created_at).to_i
   end
 
   def score_exam

@@ -2,7 +2,7 @@ module RailsAdmin
   module Config
     module Actions
       class CreateQuestion < RailsAdmin::Config::Actions::Base
-   RailsAdmin::Config::Actions.register(self)
+        RailsAdmin::Config::Actions.register(self)
 
         register_instance_option :collection do
           true

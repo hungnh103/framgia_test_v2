@@ -40,6 +40,12 @@ module RailsAdminExam
           end
           hide
         end
+        field :subject_id, :enum do
+          enum do
+            Subject.all.collect {|p| [p.name, p.id]}
+          end
+          hide
+        end
         field :id do
           column_width 20
           formatted_value do
@@ -48,12 +54,6 @@ module RailsAdminExam
                 "#{bindings[:object].id}",
                 href: "exam/#{bindings[:object].id}/mark_exam")
           end
-        end
-        field :subject_id, :enum do
-          enum do
-            Subject.all.collect {|p| [p.name, p.id]}
-          end
-          hide
         end
         field :created_at do
           column_width 150

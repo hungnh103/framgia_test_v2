@@ -56,7 +56,7 @@ module RailsAdmin
               else
                 flash[:alert] = t "flashs.messages.invalid"
               end
-                redirect_to :back
+              redirect_to :back
             end
           end
         end
