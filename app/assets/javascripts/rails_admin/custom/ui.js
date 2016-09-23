@@ -1,5 +1,7 @@
 //= require turbolinks
+//= require ../../prism
 //= require_tree
+
 $(document).on("ready", function() {
   setTimeout(function() {
     $(".alert-info").fadeOut("normal");

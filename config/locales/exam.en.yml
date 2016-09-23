@@ -1,9 +1,9 @@
 en:
   exam:
-    title: "Examination List"
+    title: "List Of Exams"
     labels:
       select_subject: "Select Subject"
-      time_remain: "Time remain:"
+      time_remain: "Time remaining:"
       score_inform: "Thanks you for joining %{subject} Testing. You get %{score}/%{total} [To:%{to_id}] %{user_name}"
       exam_result: "Exam result : "
       exam_date: "Exam date : "

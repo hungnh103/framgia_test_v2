@@ -1,20 +1,19 @@
 <div class="row" id="question">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-6">
     <%= form_for(object, url: create_question_path, method: "post") do |f| %>
       <%= render "shared/errors_messages", object: object %>
       <%= f.label :subject, class: "space-top" %>
       <%= f.collection_select :subject_id, Subject.all, :id, :name, {}, class: "form-control" %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :state, value: :accepted %>
-      <%= f.label :content, class: "space-top" %>
-      <%= f.text_area :content, class: "form-control" %>
-      <div class="col-md-12 col-config" >
-        <div class="col-md-3 col-config">
-          <%= f.label :active %>
-        </div>
-        <div class="col-md-9 col-config-box">
-          <%= f.check_box :active %>
-        </div>
+
+      <div class="form-group">
+        <%= f.label :content, class: "space-top" %>
+        <%= f.text_area :content, cols: 40, rows: 10, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.check_box :active %>
+        <%= f.label :active %>
       </div>
       <%= f.label :question_type, class: "space-top" %>
       <%= f.collection_select :question_type, Settings.exam.question_type, :first, :last, {}, class: "form-control width-question-type"  %>

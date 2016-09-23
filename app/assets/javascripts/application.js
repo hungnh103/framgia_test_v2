@@ -16,11 +16,12 @@
 //= require jquery.countdown
 //= require bootstrap-sprockets
 //= require countdown
+//= require prism
 
 $(document).on("ready", function() {
   setTimeout(function() {
     $(".hide-flash").fadeOut("normal");
-  }, 3000);
+  }, 5000);
 
   check_question_type();
   check_box_state();

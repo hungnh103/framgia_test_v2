@@ -23,8 +23,8 @@ RailsAdmin.config do |config|
   end
 
   config.current_user_method(&:current_user)
-
   config.authorize_with :cancan
+  config.main_app_name = ["Framgia Test System", "Admin"]
 
   config.actions do
     dashboard

@@ -1,5 +1,6 @@
 /*
 *= require_self .
+*= require ../../prism
 */
 
 a:hover {
@@ -46,21 +47,13 @@ a:hover {
   }
 
   .button {
-    border-radius: 0px;
-    width: 20%;
+    border-radius: 2px;
+    width: 200px;
   }
 
   .button_save_continue {
-    border-radius: 0px;
-    width: 25%;
-  }
-
-  .col-config {
-    padding: 10px 0px 0px 0px;
-  }
-
-  .col-config-box {
-    padding: 10px 0px 0px 0px;
+    border-radius: 2px;
+    width: 200px;
   }
 
   table#table-show {
@@ -84,24 +77,24 @@ a:hover {
 }
 
 .button {
-    border-radius: 0px;
-    width: 20%;
+  border-radius: 0px;
+  width: 20%;
 }
 
 .right-inner-addon {
-    position: relative;
+  position: relative;
 }
 
 .right-inner-addon input {
-    padding-right: 30px;    
+  padding-right: 30px;
 }
 
 .right-inner-addon span {
-    position: absolute;
-    left: 45px;
-    padding: 7px 12px;
-    pointer-events: all;
-    cursor: pointer;
+  position: absolute;
+  left: 45px;
+  padding: 7px 12px;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 input#quantity-chosing{

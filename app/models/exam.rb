@@ -3,32 +3,27 @@ class Exam < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :subject
-
-  enum status: [:start, :testing, :checked, :unchecked]
-
   has_many :questions, through: :results
   has_many :results, dependent: :destroy
 
-  accepts_nested_attributes_for :results
+  enum status: [:start, :testing, :checked, :unchecked]
 
-  scope :select_random_question, ->subject{subject.questions
-    .where(active: 1)
-    .limit(subject.number_of_question)
-    .order("RAND()")}
+  accepts_nested_attributes_for :results
 
   scope :select_exam_not_finish, ->user_id{where user_id: user_id, status: [0, 1]}
   scope :with_score, ->(score){where score: score}
   scope :descending_by_score, ->{order(score: :desc)}
 
-  def self.score_frequency_json
-    max_score = Exam.descending_by_score.first.score ||= 0
-    min_score = Exam.descending_by_score.last.score ||= 0
-    (min_score..max_score).map{|score| [score, Exam.with_score(score).count]}.to_json
+  class << self
+    def score_frequency_json
+      max_score = Exam.descending_by_score.first.score ||= 0
+      min_score = Exam.descending_by_score.last.score ||= 0
+      (min_score..max_score).map{|score| [score, Exam.with_score(score).count]}.to_json
+    end
   end
 
-  def create_result subject
-    question_ids = Exam.select_random_question(subject).pluck :id
-    self.question_ids = question_ids
+  def create_results
+    self.questions = subject.random_questions
   end
 
   def time_out?
@@ -75,13 +70,5 @@ class Exam < ActiveRecord::Base
 
   def spent_time_format
     Time.at(time).utc.strftime("%H:%M:%S")
-  end
-
-  def column_subject
-    "#{subject.name}"
-  end
-
-  def column_id
-    "#{id}"
   end
 end

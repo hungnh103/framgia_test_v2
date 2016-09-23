@@ -1,6 +1,6 @@
 <% provide :title, @subject.name %>
 <div class="row exam">
-  <div class="col-md-8 col-md-offset-1">
+  <div class="col-md-12">
     <div class="title">
       <%= t "exam.labels.exam_date" %>
       <%= l @exam.created_at, format: :short %></br>
@@ -18,7 +18,8 @@
       <%= render "exam_form", state: false %>
     <% end %>
   </div>
-  <div class="col-md-2 col-md-offset-1 timer">
+
+  <div class="timer">
     <h4><%= t "exam.labels.time_remain" %></h4>
     <div id="clock"></div>
   </div>

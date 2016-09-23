@@ -40,9 +40,14 @@ module RailsAdminExam
           end
           hide
         end
-        field :column_id do
-          column_width 50
-          label "Id"
+        field :id do
+          column_width 20
+          formatted_value do
+            bindings[:view]
+              .content_tag(:a,
+                "#{bindings[:object].id}",
+                href: "exam/#{bindings[:object].id}/mark_exam")
+          end
         end
         field :subject_id, :enum do
           enum do
@@ -53,19 +58,16 @@ module RailsAdminExam
         field :created_at do
           column_width 150
           formatted_value do
-            bindings[:view].content_tag(:a, "#{bindings[:object].created_at.strftime("%Y-%m-%d %I:%M%p")}",
-              href: "exam/#{bindings[:object].id}")
+            bindings[:view]
+              .content_tag(:a,
+                "#{bindings[:object].created_at.strftime("%Y-%m-%d %I:%M%p")}",
+                href: "exam/#{bindings[:object].id}/mark_exam")
           end
         end
-        field :user_column do
-          label "User"
+        field :user do
           column_width 100
-          formatted_value do
-            bindings[:view].content_tag(:a, "#{bindings[:object].user.name}",
-              href: "user/#{bindings[:object].user_id}")
-          end
         end
-        field :column_subject do
+        field :subject do
           column_width 150
           label "Subject"
         end

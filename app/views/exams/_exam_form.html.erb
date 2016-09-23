@@ -1,7 +1,7 @@
 <%= form_for @exam do |f| %>
   <ol>
     <%= f.fields_for :results do |ff| %>
-      <li><%= ff.object.question.content %></li>
+      <li><%= ff.object.question.content.html_safe %></li>
       <br/>
       <% if ff.object.question.multiple_choice? %>
         <%= ff.collection_check_boxes :option_ids, ff.object.question.options,
@@ -25,10 +25,18 @@
       <br/>
     <% end %>
   </ol>
-  <% if false == state %>
-    <%= f.submit t("exam.buttons.save"), class: "btn btn-primary btn-submit submit-time-out" %>
-    <%= f.submit t("exam.buttons.finish"),
-      class: "btn btn-danger btn-submit pull-right", id: "btn-finish",
-      data: { confirm: t("questions.labels.warning_finish_exam") } %>
+
+  <% unless state %>
+    <div id="btn-submit-form-group">
+      <div class="container">
+        <div class="row">
+          <%= f.submit t("exam.buttons.save"),
+            class: "btn btn-primary btn-submit submit-time-out" %>
+          <%= f.submit t("exam.buttons.finish"),
+            class: "btn btn-danger btn-submit pull-right", id: "btn-finish",
+            data: { confirm: t("questions.labels.warning_finish_exam") } %>
+        </div>
+      </div>
+    </div>
   <% end %>
 <% end %>

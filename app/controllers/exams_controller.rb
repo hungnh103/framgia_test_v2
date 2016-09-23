@@ -12,7 +12,7 @@ class ExamsController < ApplicationController
   def show
     @subject = @exam.subject
     if @exam.start?
-      @exam.create_result @subject
+      @exam.create_results
       @exam.update_attribute :status, :testing
     end
     @duration = @exam.duration
@@ -24,7 +24,8 @@ class ExamsController < ApplicationController
       flash[:notice] = flash_message "created"
       redirect_to exams_path
     else
-      flash.now[:alert] = t "flashs.messages.exam_create_reject", subject: @exam.subject.name
+      flash.now[:alert] = t "flashs.messages.exam_create_reject",
+        subject: @exam.subject.name
     end
   end
 

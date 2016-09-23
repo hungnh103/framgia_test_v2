@@ -3,7 +3,7 @@
     <table id="table-show" width="100%">
       <tr>
         <td width="30%"><b><%= t "questions.title.content" %></b></td>
-        <td><%= object.content %></td>
+        <td><%= object.content.html_safe %></td>
       </tr>
       <tr>
         <td><b><%= t "questions.title.option" %></b></td>
