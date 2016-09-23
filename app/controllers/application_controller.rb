@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_current_ability
-
-  protect_from_forgery with: :exception
   include ApplicationHelper
+  protect_from_forgery with: :exception
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = exception.message
@@ -26,16 +25,5 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update).push :name
     devise_parameter_sanitizer.for(:account_update).push :chatwork_id
     devise_parameter_sanitizer.for(:account_update).push :chatwork_api_key
-  end
-
-  private
-  def namespace
-    controller_name_segments = params[:controller].split('/')
-    controller_name_segments.pop
-    controller_namespace = controller_name_segments.join('/').camelize
-  end
-
-  def set_current_ability
-    @current_ability ||= Ability.new(current_user, namespace)
   end
 end

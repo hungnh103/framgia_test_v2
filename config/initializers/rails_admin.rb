@@ -17,6 +17,25 @@ RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::MultiDeactiveQ
 require Rails.root.join("lib", "rails_admin", "dashboard.rb")
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Dashboard)
 
+RailsAdmin::ApplicationHelper.class_eval do
+  def link_to_add_fields label, f, assoc
+    new_obj = f.object.class.reflect_on_association(assoc).klass.new
+    fields = f.fields_for assoc, new_obj,child_index: "new_#{assoc}" do |builder|
+      render "#{assoc.to_s.singularize}_fields", f: builder
+    end
+    link_to label, "#", class: "add-button fa fa-plus",
+      onclick: "add_fields(this, \"#{assoc}\", \"#{escape_javascript(fields)}\")", remote: true
+  end
+
+  def link_to_remove_fields label, f
+    field = f.hidden_field :_destroy
+    link = link_to label, "#",
+      class: "remove-button fa fa-trash text-danger",
+      onclick: "remove_fields(this)", remote: true
+    field + link
+  end
+end
+
 RailsAdmin.config do |config|
   config.authenticate_with do
     warden.authenticate! scope: :user
@@ -46,7 +65,7 @@ RailsAdmin.config do |config|
     mark_exam
     show_question
     show do
-      except "Question"
+      except ["Question", "Exam"]
     end
     edit_question
     edit do

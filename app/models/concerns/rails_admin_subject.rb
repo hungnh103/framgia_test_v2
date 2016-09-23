@@ -13,13 +13,8 @@ module RailsAdminSubject
       end
 
       list do
-        field :subject_name do
-          label "Name"
-          formatted_value do
-            bindings[:view].content_tag(:a, "#{bindings[:object].name}",
-              href: "subject/#{bindings[:object].id}")
-          end
-        end
+        field :id
+        field :name
         field :number_of_question
         field :duration
         field :chatwork_room_id

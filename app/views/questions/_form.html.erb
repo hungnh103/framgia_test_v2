@@ -3,7 +3,8 @@
   <%= f.label :subject, class: "space-top" %>
   <%= f.collection_select :subject_id, @subjects, :id, :name, {}, class: "form-control" %>
   <%= f.label :content, class: "space-top" %>
-  <%= f.text_area :content, class: "form-control" %>
+  <%= f.text_area :content, cols: 40, rows: 10, class: "form-control" %>
+  <span class="help-block">User can use <code>&lt;pre&gt;&lt;code class="language-css"&gt;your code here&lt;/code&gt;&lt;/pre&gt;</code> to input it on question content.</span>
   <%= f.label :question_type, class: "space-top" %>
   <% if @question.new_record? %>
     <%= f.collection_select :question_type,
