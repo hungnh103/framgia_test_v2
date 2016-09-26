@@ -1,7 +1,11 @@
 <%= form_for(object, url: mark_exam_path, method: :post) do |f| %>
   <ol>
     <%= f.fields_for :results do |ff| %>
-      <li><%= ff.object.question.content.html_safe %></li>
+      <li>
+        <p>
+          <strong><%= ff.object.question.content.html_safe %></strong>
+        </p>
+      </li>
       <% if ff.object.question.multiple_choice? %>
         <%= ff.collection_check_boxes :option_ids, ff.object.question.options,
           :id, :content, {}, {disabled: true} do |ck| %>
@@ -21,15 +25,16 @@
         <% else %>
           <%= ff.check_box :correct %>
         <% end %>
-        <%= t "admin.labels.check_correct" %></br>
+        <%= ff.label :correct, t("admin.labels.check_correct") %>
       <% else %>
         <%= ff.fields_for :answers do |fff| %>
           <% if ff.object.question.text? %>
             <i><%= t "admin.labels.answer" %></i>
             <%= render partial: "option_text",
-              collection: ff.object.question.options, as: :option %></br>
+              collection: ff.object.question.options, as: :option %>
             <%= fff.text_area :content, readonly: true, class: "form-control option_text" %>
-            <%= ff.check_box :correct %> <%= t "admin.labels.check_correct" %></br>
+            <%= ff.check_box :correct %>
+            <%= ff.label :correct, t("admin.labels.check_correct") %>
           <% else %>
             <%= fff.collection_radio_buttons :option_id, ff.object.question.options,
               :id, :content, {}, {disabled: true} do |rb| %>
@@ -40,12 +45,17 @@
             <% else %>
               <%= ff.check_box :correct  %>
             <% end %>
-            <%= t "admin.labels.check_correct" %></br>
+            <%= ff.label :correct, t("admin.labels.check_correct") %></br>
           <% end %>
         <% end %>
       <% end %>
-      <br/>
     <% end %>
   </ol>
-  <%= f.submit t("exam.buttons.submit"), class: "btn btn-primary btn-submit button" %>
+
+  <div id="btn-submit-form-group">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+      <%= f.submit t("exam.buttons.submit"),
+        class: "btn btn-danger btn-submit button" %>
+    </div>
+  </div>
 <% end %>
