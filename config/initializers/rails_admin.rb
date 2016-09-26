@@ -34,6 +34,10 @@ RailsAdmin::ApplicationHelper.class_eval do
       onclick: "remove_fields(this)", remote: true
     field + link
   end
+
+  def flash_message flash_type
+    t "flashs.messages.#{flash_type}", model_name: controller_name.classify
+  end
 end
 
 RailsAdmin.config do |config|
