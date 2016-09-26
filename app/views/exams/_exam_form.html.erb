@@ -2,9 +2,7 @@
   <ol>
     <%= f.fields_for :results do |ff| %>
       <li>
-        <p>
-          <strong><%= ff.object.question.content.html_safe %></strong>
-        </p>
+        <strong><%= ff.object.question.content.html_safe %></strong>
         <% if ff.object.question.multiple_choice? %>
           <%= ff.collection_check_boxes :option_ids, ff.object.question.options,
             :id, :content, {}, {disabled: state} do |ck| %>
