@@ -5,26 +5,26 @@
         <p>
           <strong><%= ff.object.question.content.html_safe %></strong>
         </p>
-      </li>
-      <% if ff.object.question.multiple_choice? %>
-        <%= ff.collection_check_boxes :option_ids, ff.object.question.options,
-          :id, :content, {}, {disabled: state} do |ck| %>
-            <%= ck.label(class: "check_box"){ck.check_box(class: "ck") + ck.text} %>
-        <% end %>
-        <%= ff.object.result_status.html_safe %>
-      <% else %>
-        <%= ff.fields_for :answers do |fff| %>
-          <% if ff.object.question.text? %>
-            <%= fff.text_area :content, readonly: state, class: "form-control" %>
-          <% else %>
-            <%= fff.collection_radio_buttons :option_id, ff.object.question.options,
-              :id, :content, {}, {disabled: state} do |rb| %>
-                <%= rb.label(class: "radio"){rb.radio_button + rb.text} %>
-            <% end %>
+        <% if ff.object.question.multiple_choice? %>
+          <%= ff.collection_check_boxes :option_ids, ff.object.question.options,
+            :id, :content, {}, {disabled: state} do |ck| %>
+              <%= ck.label(class: "check_box"){ck.check_box(class: "ck") + ck.text} %>
           <% end %>
-          <%= fff.object.result.result_status.html_safe %>
+          <%= ff.object.result_status.html_safe %>
+        <% else %>
+          <%= ff.fields_for :answers do |fff| %>
+            <% if ff.object.question.text? %>
+              <%= fff.text_area :content, readonly: state, class: "form-control" %>
+            <% else %>
+              <%= fff.collection_radio_buttons :option_id, ff.object.question.options,
+                :id, :content, {}, {disabled: state} do |rb| %>
+                  <%= rb.label(class: "radio"){rb.radio_button + rb.text} %>
+              <% end %>
+            <% end %>
+            <%= fff.object.result.result_status.html_safe %>
+          <% end %>
         <% end %>
-      <% end %>
+      </li>
     <% end %>
   </ol>
 

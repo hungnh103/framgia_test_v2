@@ -18,6 +18,21 @@ require Rails.root.join("lib", "rails_admin", "dashboard.rb")
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Dashboard)
 
 RailsAdmin::ApplicationHelper.class_eval do
+  def menu_for(parent, abstract_model = nil, object = nil, only_icon = false) # perf matters here (no action view trickery)
+    actions = actions(parent, abstract_model, object).select { |a| a.http_methods.include?(:get) && a.action_name != :mark_exam }
+    actions.collect do |action|
+      wording = wording_for(:menu, action)
+      %(
+        <li title="#{wording if only_icon}" rel="#{'tooltip' if only_icon}" class="icon #{action.key}_#{parent}_link #{'active' if current_action?(action)}">
+          <a class="#{action.pjax? ? 'pjax' : ''}" href="#{rails_admin.url_for(action: action.action_name, controller: 'rails_admin/main', model_name: abstract_model.try(:to_param), id: (object.try(:persisted?) && object.try(:id) || nil))}">
+            <i class="#{action.link_icon}"></i>
+            <span#{only_icon ? " style='display:none'" : ''}>#{wording}</span>
+          </a>
+        </li>
+      )
+    end.join.html_safe
+  end
+
   def link_to_add_fields label, f, assoc
     new_obj = f.object.class.reflect_on_association(assoc).klass.new
     fields = f.fields_for assoc, new_obj,child_index: "new_#{assoc}" do |builder|
