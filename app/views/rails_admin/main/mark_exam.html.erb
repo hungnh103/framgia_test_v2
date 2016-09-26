@@ -2,19 +2,20 @@
   <div class="col-md-8">
     <p class="text-left">
       <b>
-        <%= t "username" %> : 
+        <%= t "User" %>:
         <%= link_to object.user.name, rails_admin.show_path("User", object.user) %>
       </b>
     </p>
     <p class="text-left">
-      <b> 
-        <%= t "Examm'subject" %> :
+      <b>
+        <%= t "Subject" %> :
         <%= object.subject.name %>
       </b>
     </p>
-    <hr>
     <p class="score-label">
-    <%= t("admin.labels.total_score", score: object.score_exam) %></p>
+      <%= t("admin.labels.total_score", score: object.score_exam) %>
+    </p>
+    <hr>
     <%= render "mark_exam_form", object: object %>
   </div>
 </div>
