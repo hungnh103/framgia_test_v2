@@ -10,9 +10,13 @@ class Exam < ActiveRecord::Base
 
   accepts_nested_attributes_for :results
 
-  scope :select_exam_not_finish, ->user_id{where user_id: user_id, status: [0, 1]}
-  scope :with_score, ->(score){where score: score}
-  scope :descending_by_score, ->{order(score: :desc)}
+  scope :with_score, ->score {where score: score}
+  scope :descending_by_score, ->{order score: :desc}
+
+  delegate :number_of_question, to: :subject, prefix: false
+
+  PARAMS_ATTRIBUTES = [:subject_id, results_attributes: [:id, option_ids: [],
+    answers_attributes: [:id, :content, :option_id]]]
 
   class << self
     def score_frequency_json
@@ -20,10 +24,6 @@ class Exam < ActiveRecord::Base
       min_score = Exam.descending_by_score.last.score ||= 0
       (min_score..max_score).map{|score| [score, Exam.with_score(score).count]}.to_json
     end
-  end
-
-  def create_results
-    self.questions = subject.random_questions
   end
 
   def time_out?
@@ -61,7 +61,7 @@ class Exam < ActiveRecord::Base
 
   def duration
     return 0 if unchecked? || checked?
-    (subject.duration || 20) * 60 - (Time.zone.now - results.first.created_at).to_i
+    (subject.duration || 20) * 60 - (Time.zone.now - updated_at).to_i
   end
 
   def score_exam

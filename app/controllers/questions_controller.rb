@@ -31,8 +31,6 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    params[:question][:state] = :waiting if @question.rejected? && !current_user.admin?
-
     if @question.update_attributes question_params
       redirect_to user_questions_path(current_user), notice: flash_message("updated")
     else
@@ -51,8 +49,7 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit :content, :subject_id, :user_id,
-      :state, :question_type, options_attributes: [:id, :content, :correct, :_destroy]
+    params.require(:question).permit Question::PARAMS_ATTRIBUTES
   end
 
   def load_subjects
