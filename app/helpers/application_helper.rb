@@ -36,8 +36,7 @@ module ApplicationHelper
 
   def link_to_remove_fields label, f
     field = f.hidden_field :_destroy
-    link = link_to label, "#",
-      class: "remove-button fa fa-trash text-danger",
+    link = link_to label, "#", class: "remove-button fa fa-trash text-danger",
       onclick: "remove_fields(this)", remote: true
     field + link
   end

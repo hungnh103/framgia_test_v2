@@ -6,23 +6,25 @@ class ExamsController < ApplicationController
   def index
     @exam = Exam.new
     @subjects = Subject.order :name
-    @exams = current_user.exams.page(params[:page]).order "created_at DESC"
+    @exams = current_user.exams.order(created_at: :desc).page params[:page]
   end
 
   def show
     @subject = @exam.subject
     if @exam.start?
-      @exam.create_results
-      @exam.update_attribute :status, :testing
+      questions = Question.random_with_subject(@exam.subject)
+      if questions.size < @exam.number_of_question
+        redirect_to root_path, alert: flash_message("not_start")
+      else
+        @exam.update_attributes status: :testing, questions: questions
+      end
     end
-    @duration = @exam.duration
   end
 
   def create
     @exam = current_user.exams.build exam_params
     if @exam.save
-      flash[:notice] = flash_message "created"
-      redirect_to exams_path
+      redirect_to root_path, notice: flash_message("created")
     else
       flash.now[:alert] = t "flashs.messages.exam_create_reject",
         subject: @exam.subject.name
@@ -41,14 +43,13 @@ class ExamsController < ApplicationController
     else
       flash[:alert] = t "flashs.messages.invalid"
     end
-    redirect_to exams_url
+    redirect_to root_path
   end
 
 
   private
   def exam_params
-    params.require(:exam).permit :subject_id,
-      results_attributes: [:id, option_ids: [], answers_attributes: [:id, :content, :option_id]]
+    params.require(:exam).permit Exam::PARAMS_ATTRIBUTES
   end
 
   def correct_user?

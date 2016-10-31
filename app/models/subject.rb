@@ -10,10 +10,6 @@ class Subject < ActiveRecord::Base
   validates :duration, presence: true,
     numericality: {only_integer: true, greater_than: 0}
 
-  def random_questions
-    questions.where(active: 1).order("RAND()").limit number_of_question
-  end
-
   def subject_duration
     "#{duration} minutes"
   end

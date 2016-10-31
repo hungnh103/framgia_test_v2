@@ -10,7 +10,7 @@
       <% end %>
       <center><b><h2><%= @subject.name %></h2></b></center>
       <hr>
-      <%= hidden_field_tag :duration, @duration %>
+      <%= hidden_field_tag :duration, @exam.duration %>
     </div>
     <% if @exam.time_out? %>
       <%= render "exam_form", state: true %>
