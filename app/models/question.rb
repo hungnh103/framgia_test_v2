@@ -26,7 +26,7 @@ class Question < ActiveRecord::Base
     .group(:id).order("COUNT(results.question_id) DESC").limit(quantity)
   end
   scope :random_with_subject, ->subject do
-    where(state: :accepted, active: 1, subject: subject)
+    accepted.where(active: 1, subject: subject)
       .order("RAND()").limit subject.number_of_question || 30
   end
 
