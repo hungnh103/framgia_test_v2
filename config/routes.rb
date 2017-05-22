@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     resources :questions
   end
   resources :exams, only: [:index, :show, :create, :update]
+  resources :subjects, only: :show
 end

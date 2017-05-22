@@ -29,6 +29,9 @@ class Question < ActiveRecord::Base
     accepted.where(active: 1, subject: subject)
       .order("RAND()").limit subject.number_of_question || 30
   end
+  scope :not_text_question, -> do
+    where("question_type != 2")
+  end
 
   def active_question
     if active?

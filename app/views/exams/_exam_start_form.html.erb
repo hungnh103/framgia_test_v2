@@ -1,8 +1,10 @@
 <div class="form-exam">
-  <%= form_for @exam, html: {class: "form-inline"} do |f| %>
-    <%= f.select :subject_id,
-      options_from_collection_for_select(@subjects, :id, :name), {},
-      class: "form-control button" %>
+  <%= form_for @exam do |f| %>
+    <div class="select-subject col-md-2">
+      <%= f.select :subject_id,
+        options_from_collection_for_select(@subjects, :id, :name), {},
+        class: "form-control button" %>
+    </div>
     <%= f.submit t("exam.buttons.create_exam"), class: "btn btn-primary button" %>
   <% end %>
 </div>
