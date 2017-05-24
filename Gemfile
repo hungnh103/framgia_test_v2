@@ -7,7 +7,6 @@ gem "uglifier", ">= 1.3.0"
 gem "coffee-rails", "~> 4.1.0"
 gem "jquery-rails"
 gem "turbolinks"
-
 gem "devise"
 gem "kaminari"
 gem "bootstrap-kaminari-views"
@@ -19,6 +18,7 @@ gem "bootstrap-sass"
 gem "jquery-countdown-rails"
 gem "chatwork"
 gem "rails_admin"
+gem "htmltoword"
 
 group :production do
   gem "unicorn"

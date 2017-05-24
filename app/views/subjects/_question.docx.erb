@@ -1,0 +1,13 @@
+<div class="form-group">
+  <strong><%= question_counter + 1 %>. <%= question.content %></strong>
+
+  <ul>
+    <% question.options.each do |option| %>
+      <li class="h" data-list-style-type="disc">
+        <span data-style=<%= "green" if option.correct? %>>
+          <%= option.content %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</div>
