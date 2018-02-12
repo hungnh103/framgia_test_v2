@@ -1,6 +1,6 @@
 <div class="row" id="question">
   <div class="col-md-6">
-    <%= form_for(object, url: create_question_path, method: "post") do |f| %>
+    <%= form_for object, url: create_question_path, method: "post" do |f| %>
       <%= render "shared/errors_messages", object: object %>
       <%= f.label :subject, class: "space-top" %>
       <%= f.collection_select :subject_id, Subject.all, :id, :name, {}, class: "form-control" %>
@@ -9,7 +9,14 @@
 
       <div class="form-group">
         <%= f.label :content, class: "space-top" %>
-        <%= f.text_area :content, cols: 40, rows: 10, class: "form-control" %>
+
+        <!-- = form.cktext_area :notes, class: 'someclass', ckeditor: { language: 'uk'}
+        = form.cktext_area :content, value: 'Default value', id: 'sometext'
+        = cktext_area :page, :info, cols: 40, ckeditor: { uiColor: '#AADC6E', toolbar: 'mini' } -->
+
+        <%= f.text_area :content, cols: 40, rows: 10, class: "ckeditor" %>
+        <%#= f.text_area :content, cols: 40, rows: 10, class: "form-control" %>
+
         <span class="help-block">User can use <code>&lt;pre&gt;&lt;code class="language-css"&gt;your code here&lt;/code&gt;&lt;/pre&gt;</code> to input it on question content.</span>
       </div>
       <div class="form-group">

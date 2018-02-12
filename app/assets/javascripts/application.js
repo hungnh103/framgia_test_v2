@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 //= require countdown
 //= require prism
+//= require ckeditor/init
 
 $(document).on("ready", function() {
   setTimeout(function() {
